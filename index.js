@@ -1,38 +1,47 @@
-import { program } from "commander"
-import { addTodo, updateTodo, readTodos, deleteTodo, deleteAllTodos} from './todos'
+import { program } from "commander";
+import {
+  addTodo,
+  updateTodo,
+  readTodos,
+  deleteTodo,
+  deleteAllTodos,
+} from "./todos";
 
 program
-  .command('addTodo')
-  .description('Add a new todo')
-  .option('-t, --title <title>', 'Title of the todo')
-  .option('-d, --description <description>', 'Description of the todo')
-  .option('-s, --status <status>', 'Status of the todo (todo, inprogress, complete)')
+  .command("addTodo")
+  .description("Add a new todo")
+  .option("-t, --title <title>", "Title of the todo")
+  .option("-d, --description <description>", "Description of the todo")
+  .option(
+    "-s, --status <status>",
+    "Status of the todo (todo, inprogress, complete)",
+  )
   .action(addTodo);
 
-  program
-  .command('updateTodo')
-  .description('Update a todo item')
-  .option('-i, --id <id>', 'ID of the todo')
-  .option('-t, --title <title>', 'New title')
-  .option('-d, --description <description>', 'New description')
-  .option('-s, --status <status>', 'New status (todo, inprogress, complete)')
+program
+  .command("updateTodo")
+  .description("Update a todo item")
+  .option("-i, --id <id>", "ID of the todo")
+  .option("-t, --title <title>", "New title")
+  .option("-d, --description <description>", "New description")
+  .option("-s, --status <status>", "New status (todo, inprogress, complete)")
   .action(updateTodo);
 
-  program
-  .command('readTodos')
-  .description('Read all todos or a specific one')
-  .option('-i, --id <id>', 'ID of the todo')
+program
+  .command("readTodos")
+  .description("Read all todos or a specific one")
+  .option("-i, --id <id>", "ID of the todo")
   .action(readTodos);
 
-  program
-  .command('deleteTodo')
-  .description('Delete a specific todo')
-  .option('-i, --id <id>', 'ID of the todo')
+program
+  .command("deleteTodo")
+  .description("Delete a specific todo")
+  .option("-i, --id <id>", "ID of the todo")
   .action(deleteTodo);
 
-  program
-  .command('deleteAllTodos')
-  .description('Delete all todos and asks for confirmation')
-  .action(deleteAllTodos);  
+program
+  .command("deleteAllTodos")
+  .description("Delete all todos and asks for confirmation")
+  .action(deleteAllTodos);
 
-  program.parse(process.argv);
+program.parse(process.argv);
