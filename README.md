@@ -20,6 +20,7 @@ Just wrapped up an exciting Command Line Interface (CLI) Todo App using Node.js,
 ```
 node index.js addTodo -t "Learn Node.js" -d "Study CLI apps" -s todo
 ```
+
 📌 Read all tasks:
 
 ```
@@ -56,8 +57,6 @@ node index.js --help
 npx prisma studio
 ```
 
-
 With Prisma Studio, I can visually inspect, edit, and manage todos in the database without writing queries manually—making debugging and testing a breeze!
-
 
 This project has been a game-changer for me in Node.js CLI development, Prisma ORM, and PostgreSQL database management. Excited to keep building and learning!

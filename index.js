@@ -12,12 +12,17 @@ program
   .description("Add a new todo")
   .option("-t, --title <title>", "Title of the todo")
   .option("-d, --description <description>", "Description of the todo")
-  .option("-s, --status <status>", "Status of the todo (todo, inprogress, complete)")
-  .action((options) => addTodo({
-    title: options.title,
-    description: options.description,
-    status: options.status
-  }));
+  .option(
+    "-s, --status <status>",
+    "Status of the todo (todo, inprogress, complete)",
+  )
+  .action((options) =>
+    addTodo({
+      title: options.title,
+      description: options.description,
+      status: options.status,
+    }),
+  );
 
 program
   .command("updateTodo")
