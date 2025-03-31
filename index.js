@@ -5,7 +5,7 @@ import {
   readTodos,
   deleteTodo,
   deleteAllTodos,
-} from "./todos";
+} from "./todos.js";
 
 program
   .command("addTodo")
