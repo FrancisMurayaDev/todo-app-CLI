@@ -17,7 +17,7 @@ export async function addTodo({ title, description, status }) {
   }
 
   const newTodo = await prisma.todo.create({
-    data: { title, description, status: status.toUpperCase() }, // ✅ Convert to uppercase
+    data: { title, description, status: status.toUpperCase() },
   });
   console.log(chalk.green(`Todo added: ${newTodo.title} - ${newTodo.description} [${newTodo.status}]`));
 }
