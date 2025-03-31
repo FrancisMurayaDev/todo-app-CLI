@@ -5,34 +5,24 @@ import readline from "readline";
 const prisma = new PrismaClient();
 const validStatuses = ["todo", "inprogress", "complete"];
 
-export async function addTodo(options) {
-  const { title, description, status } = options;
-
+export async function addTodo({ title, description, status }) {
   if (!title || !description || !status) {
     console.log(chalk.red("Error: All fields are required!"));
     return;
   }
 
   if (!validStatuses.includes(status.toLowerCase())) {
-    console.log(
-      chalk.red('Error: Status must be "todo", "inprogress", or "complete"!'),
-    );
+    console.log(chalk.red('Error: Status must be "todo", "inprogress", or "complete"!'));
     return;
   }
 
   const newTodo = await prisma.todo.create({
-    data: { title, description, status },
+    data: { title, description, status: status.toUpperCase() }, // ✅ Convert to uppercase
   });
-  console.log(
-    chalk.green(
-      `Todo added: ${newTodo.title} - ${newTodo.description} [${newTodo.status}]`,
-    ),
-  );
+  console.log(chalk.green(`Todo added: ${newTodo.title} - ${newTodo.description} [${newTodo.status}]`));
 }
 
-export async function updateTodo(options) {
-  const { id, title, description, status } = options;
-
+export async function updateTodo({ id, title, description, status }) {
   if (!id) {
     console.log(chalk.red("Error: Todo ID is required!"));
     return;
@@ -45,33 +35,33 @@ export async function updateTodo(options) {
 
   await prisma.todo.update({
     where: { id },
-    data: { title, description, status },
+    data: { title, description, status: status ? status.toUpperCase() : undefined },
   });
   console.log(chalk.yellow("Todo updated!"));
 }
 
-export async function readTodos(options) {
-  if (options.id) {
-    const todo = await prisma.todo.findUnique({ where: { id: options.id } });
+export async function readTodos({ id }) {
+  if (id) {
+    const todo = await prisma.todo.findUnique({ where: { id } });
     if (!todo) {
       console.log(chalk.red("Todo not found!"));
       return;
     }
-    console.log(
-      chalk.blue(`${todo.title} - ${todo.description} [${todo.status}]`),
-    );
+    console.log(chalk.blue(`${todo.title} - ${todo.description} [${todo.status}]`));
   } else {
     const todos = await prisma.todo.findMany();
     todos.forEach((todo) => {
-      console.log(
-        `${chalk.magenta(todo.id)} - ${todo.title} - ${todo.description} [${todo.status}]`,
-      );
+      console.log(`${chalk.magenta(todo.id)} - ${todo.title} - ${todo.description} [${todo.status}]`);
     });
   }
 }
 
-export async function deleteTodo(options) {
-  await prisma.todo.delete({ where: { id: options.id } });
+export async function deleteTodo({ id }) {
+  if (!id) {
+    console.log(chalk.red("Error: Todo ID is required!"));
+    return;
+  }
+  await prisma.todo.delete({ where: { id } });
   console.log(chalk.red("Todo deleted!"));
 }
 

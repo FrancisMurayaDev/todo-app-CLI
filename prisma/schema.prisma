@@ -17,5 +17,5 @@ model Todo {
   id          String  @id @default(uuid())
   title       String
   description String
-  status      Status  @default(TODO)  // Default value set to "TODO"
+  status      Status  @default(TODO)
 }
